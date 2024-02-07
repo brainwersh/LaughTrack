@@ -1,0 +1,48 @@
+{% load static %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="{% url 'laughtrack:homepage' %}">
+            <img src="{% static 'laughtrack/logo.png' %}" >
+        </a>
+
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="{% url 'laughtrack:homepage'%}">
+                Home
+            </a>
+
+            <a class="navbar-item" href="{% url 'laughtrack:following' %}">
+                Following
+            </a>
+
+        </div>
+    </div>
+
+    <div class="navbar-end">
+        <div class="navbar-item">
+
+            <div class="buttons">
+                {% if request.user.username %}
+                <div class="button">{{request.user.username}}</div>
+                <a class="button is-primary" href="{% url 'laughtrack:logout_view' %}">
+                    <strong>Log out</strong>
+                </a>
+                {% else %}
+                <a class="button is-primary" href="{% url 'laughtrack:signup' %}">
+                    <strong>Sign up</strong>
+                </a>
+                <a class="button is-light" href="{% url 'laughtrack:signin' %}">
+                    Sign in
+                </a>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</nav>

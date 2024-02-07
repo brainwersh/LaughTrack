@@ -1,0 +1,17 @@
+{%if events%}
+{%for event in events%}
+
+<a href="{{page}}/{{event.id}}" style="text-decoration: none;">
+  <div class="notification is-primary">
+
+    <div class="title is-4">{{ event.title }}</div>
+    <p class="content">Comedian: 
+      <a href="{% url 'laughtrack:comedian' event.comedian.id %}">{{event.comedian}}</a>
+    </p>
+  </div>
+</a>
+
+{%endfor%}
+{%else%}
+<h1 class="subtitle">There are no events</h1>
+{%endif%}

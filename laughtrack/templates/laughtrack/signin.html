@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/6b3b270695.js" crossorigin="anonymous"></script>
+<body>
+<div class="column">
+    
+    <div class="box">
+        <h1 class="title">Sign Up:</h1>
+    {% if error %}
+        {{error}}
+    {% endif %}
+        <form action="{% url 'laughtrack:signup' %}", method="post">
+            {% csrf_token %}
+            <p>Input Username:</p>
+            <input type="text" name="Username">
+            <p>Input Password:</p>
+            <input type="password" name="Password">
+            <p>Input Email: (optional)</p>
+            <input type="text" name="Email">
+            <input type="submit" value="Sign up">
+    </div>
+    
+    </form>
+
+    <div class="box">
+        <h1 class="title">Sign In:</h1>
+        <form action="{% url 'laughtrack:signin' %}", method="post">
+            {% csrf_token %}
+            <p>Input Username:</p>
+            <input type="text" name="Username">
+            <p>Input Password:</p>
+            <input type="password" name="Password">
+            
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+</div>

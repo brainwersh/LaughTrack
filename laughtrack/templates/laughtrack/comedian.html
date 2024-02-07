@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/6b3b270695.js" crossorigin="anonymous"></script>
+</head>
+{% include 'laughtrack/navbar.html' %}
+<section class="section">
+    <body>
+        
+        <h1 class="title">{{comedian}}</h1>
+        <h2 class="subtitle">{{comedian.followers.all | length}} followers</h2>
+        {% if request.user in comedian.followers.all %}
+            <a href="{% url 'laughtrack:unfollow' comedian.id %}" class="button">
+                <span class="icon-text">
+                    <span>Unfollow</span>
+                    <span class="icon">
+                        <i class="fa-solid fa-user-minus"></i>
+                    </span>
+                </span>
+            </a>
+        {% else %}
+            <a href="{% url 'laughtrack:follow' comedian.id %}" class="button">
+                <span class="icon-text">
+                    <span>Follow</span>
+                    <span class="icon">
+                        <i class="fa-solid fa-user-plus"></i>
+                    </span>
+                </span>
+            </a>
+        {%endif%}
+        <br>
+        <h3 class="block">
+            <a href="{% url 'laughtrack:homepage'%}" class="button">
+                <span class="icon-text">
+                        <span class="icon">
+                            <i class="fa-solid fa-left-long"></i>
+                        </span>
+                    <span>back to homepage</span>
+                </span>
+            </a>
+        </h3>
+        <div class="columns">
+            <div class="column">{% include 'laughtrack/events.html' %}</div>
+            <div class="column">{% include 'laughtrack/details.html' %}</div>
+        </div>
+    </body>
+</section>
+
+
+

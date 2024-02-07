@@ -1,0 +1,43 @@
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <script src="https://kit.fontawesome.com/6b3b270695.js" crossorigin="anonymous"></script>
+</head>
+<div class="box">
+  {% if event %}
+      <h3 class="title is-1">{{ event.title }}</h3>
+      <p class="subtitle is-4">Comedian: <a href="{% url 'laughtrack:comedian' event.comedian.id %}">{{event.comedian}}</a></p>
+      <p>{{ event.description}}</p>
+      <strong>Link to Tickets: <a href={{event.tickets}}>{{event.tickets}}</a></strong>
+</div>
+          {% if request.user.username %}
+            <p><strong>Post Comment:</strong></p>
+            <form action="{% url 'laughtrack:post_comment' event.id %}" method="post">
+                {% csrf_token %}
+                <p><textarea name="comment_text" cols="30" rows="2"></textarea></p>
+                <input type="submit" value="Post">
+        {% else %}
+        <strong class="box">Sorry. log in to post a comment</strong>
+        {%endif%}
+        </form>
+        {%if comments%}
+        {%for comment in comments%}
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <strong>{{comment.user}}</strong>
+                          <br>
+                          {{comment.comment_text}}
+                        </p>
+                      </div>
+                    </div>
+                  </article>
+            </div>
+        {%endfor%}
+        {%endif%}
+
+{%endif%}
+
+
+
